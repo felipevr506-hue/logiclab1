@@ -1,0 +1,208 @@
+.page {
+  --font-body: 15px;
+  --font-secondary: 14px;
+  --font-section: 20px;
+  --font-card: 17px;
+  max-width: 1080px;
+  margin-inline: auto;
+  display: grid;
+  gap: 24px;
+}
+.welcome > span {
+  --font-secondary: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+.welcome h1 {
+  --font-headline: clamp(1.8rem, 3vw, 2.5rem);
+  margin: 12px 0 8px;
+}
+.welcome p {
+  color: var(--muted-bright);
+  margin: 0;
+}
+.nextCard {
+  --font-section: clamp(1.5rem, 2.5vw, 1.9rem);
+  border: 1px solid color-mix(in srgb, var(--green) 40%, var(--border));
+  border-radius: 16px;
+  padding: clamp(24px, 4vw, 36px);
+  background: linear-gradient(120deg, var(--violet-soft), var(--surface));
+}
+.eyebrow {
+  --font-secondary: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--violet-bright);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.nextCard h2 {
+  margin: 16px 0 12px;
+}
+.nextCard > p {
+  max-width: 670px;
+  color: var(--muted-bright);
+  margin: 0;
+}
+.nextActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  margin-top: 24px;
+}
+.nextActions > span {
+  --font-secondary: 13px;
+  color: var(--muted);
+}
+.nextCard > small {
+  --font-secondary: 13px;
+  display: block;
+  color: var(--muted);
+  margin-top: 16px;
+}
+.overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cardTitle > svg {
+  color: var(--green);
+}
+.cardTitle h2 {
+  margin: 0;
+}
+.pathCount {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: baseline;
+  margin-top: 24px;
+}
+.pathCount strong {
+  --font-body: 24px;
+}
+.pathCount > span {
+  color: var(--muted);
+}
+.progress {
+  height: 6px;
+  width: 100%;
+  border-radius: 4px;
+  background: var(--border);
+  overflow: hidden;
+  margin-top: 14px;
+}
+.progress i {
+  display: block;
+  height: 100%;
+  background: var(--green);
+  border-radius: inherit;
+}
+.card p {
+  color: var(--muted);
+  margin: 16px 0 22px;
+}
+.card h3 {
+  margin: 24px 0 0;
+}
+.textLink {
+  --font-body: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--violet-bright);
+  font-weight: 600;
+  min-height: 44px;
+}
+.card > .textLink {
+  margin-top: auto;
+}
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px 32px;
+  border-block: 1px solid var(--border);
+  padding: 20px 4px;
+}
+.summary > div {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.summary > div > svg {
+  color: var(--muted);
+}
+.summary b {
+  --font-body: 14px;
+  font-weight: 600;
+}
+.summary p {
+  --font-body: 13px;
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+.summary > a {
+  margin-left: auto;
+}
+.recommendation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 8px 4px;
+}
+.recommendation h2 {
+  --font-section: 17px;
+  margin: 10px 0 8px;
+}
+.recommendation p {
+  color: var(--muted);
+  margin: 0;
+  max-width: 650px;
+}
+@media (max-width: 700px) {
+  .overview {
+    grid-template-columns: 1fr;
+  }
+  .nextActions {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .nextActions a {
+    white-space: normal;
+    text-align: center;
+  }
+  .summary {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .summary > a {
+    margin-left: 0;
+  }
+  .recommendation {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .card {
+    padding: 22px;
+  }
+}

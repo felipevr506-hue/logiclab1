@@ -1,0 +1,48 @@
+.navigation {
+  align-content: start;
+  padding-top: 12px;
+}
+.primary {
+  display: grid;
+  gap: 5px;
+}
+.group {
+  border-top: 1px solid var(--border);
+  margin-top: 16px;
+  padding-top: 8px;
+}
+.group summary {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  color: var(--muted-bright);
+  font-size: 14px;
+  font-weight: 600;
+  list-style: none;
+}
+.group summary::-webkit-details-marker {
+  display: none;
+}
+.group summary svg {
+  width: 16px;
+  transition: transform 0.15s;
+}
+.group[open] > summary svg {
+  transform: rotate(90deg);
+}
+.group > div {
+  display: grid;
+  gap: 4px;
+  padding-bottom: 4px;
+}
+.group a {
+  margin-left: 6px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .group summary svg {
+    transition: none;
+  }
+}

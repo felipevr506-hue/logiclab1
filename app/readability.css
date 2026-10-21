@@ -1,0 +1,1682 @@
+/*
+ * Escala de leitura da aplicação.
+ * Mantém o navegador em 100% e aumenta componentes por tokens, sem zoom/scale.
+ */
+:root {
+  --font-caption: clamp(0.875rem, 0.78vw, 0.9375rem);
+  --font-secondary: clamp(0.875rem, 0.84vw, 1rem);
+  --font-body: clamp(1rem, 0.95vw, 1.125rem);
+  --font-card: clamp(1.125rem, 1.25vw, 1.375rem);
+  --font-section: clamp(1.75rem, 2.4vw, 2.25rem);
+  --font-headline: clamp(2.5rem, 4.2vw, 3.5rem);
+  --font-code: 1rem;
+  --font-console: 0.9375rem;
+  --page-pad: clamp(1.25rem, 2.6vw, 2.75rem);
+  --card-pad: clamp(1.125rem, 1.8vw, 1.75rem);
+  --content-gap: clamp(1rem, 1.5vw, 1.5rem);
+  --control-height: 3rem;
+  --comfortable-line: 1.65;
+  --muted: #9ca4b2;
+  --muted-bright: #c1c7d2;
+}
+
+:root[data-theme="light"] {
+  --muted: #5d6676;
+  --muted-bright: #434c5b;
+}
+
+:root[data-interface-size="compact"] {
+  --font-caption: clamp(0.8125rem, 0.72vw, 0.875rem);
+  --font-secondary: clamp(0.8125rem, 0.78vw, 0.9375rem);
+  --font-body: clamp(0.9375rem, 0.88vw, 1.0625rem);
+  --font-card: clamp(1.0625rem, 1.15vw, 1.25rem);
+  --font-section: clamp(1.625rem, 2.2vw, 2.0625rem);
+  --control-height: 2.75rem;
+  --card-pad: clamp(1rem, 1.5vw, 1.5rem);
+}
+
+:root[data-interface-size="large"] {
+  --font-caption: clamp(0.9375rem, 0.84vw, 1rem);
+  --font-secondary: clamp(0.9375rem, 0.92vw, 1.0625rem);
+  --font-body: clamp(1.0625rem, 1.05vw, 1.1875rem);
+  --font-card: clamp(1.25rem, 1.38vw, 1.5rem);
+  --font-section: clamp(2rem, 2.65vw, 2.5rem);
+  --font-headline: clamp(2.75rem, 4.5vw, 3.75rem);
+  --control-height: 3.25rem;
+  --card-pad: clamp(1.25rem, 2vw, 2rem);
+  --content-gap: clamp(1.125rem, 1.7vw, 1.75rem);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-size: var(--font-body);
+  line-height: var(--comfortable-line);
+}
+
+body :where(p, li) {
+  font-size: var(--font-body) !important;
+  line-height: var(--comfortable-line) !important;
+}
+
+body :where(small) {
+  font-size: var(--font-secondary) !important;
+  line-height: 1.5 !important;
+}
+
+body :where(b, strong) {
+  font-size: var(--font-body) !important;
+  line-height: 1.35;
+}
+
+body > :where(div, main, section) span {
+  line-height: 1.45;
+}
+
+body :where(button, input, textarea, select) {
+  font-size: var(--font-body) !important;
+  line-height: 1.35;
+}
+
+body :where(label) {
+  font-size: var(--font-body) !important;
+  line-height: 1.5;
+}
+
+body :where(a) {
+  font-size: var(--font-body) !important;
+  line-height: 1.45;
+}
+
+.brand {
+  font-size: 1.25rem !important;
+}
+
+body :where(input, textarea, select) {
+  min-height: var(--control-height);
+}
+
+body :where(code, pre) {
+  font-size: var(--font-console) !important;
+  line-height: 1.65 !important;
+}
+
+body span {
+  font-size: var(--font-secondary) !important;
+}
+
+body :where(h1) {
+  font-size: var(--font-headline) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.04em !important;
+}
+
+body :where(h2) {
+  font-size: var(--font-section) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.025em !important;
+}
+
+body :where(h3, h4) {
+  font-size: var(--font-card) !important;
+  line-height: 1.3 !important;
+}
+
+body :where(h1, h2, h3, h4) span,
+body :where(.brand) span {
+  font-size: inherit !important;
+}
+
+.button {
+  min-height: var(--control-height);
+  padding-inline: clamp(1rem, 1.5vw, 1.5rem);
+  font-size: var(--font-body) !important;
+  border-radius: 0.75rem;
+}
+
+.container {
+  width: min(1320px, calc(100% - clamp(1.75rem, 5vw, 5rem)));
+}
+
+.section {
+  padding-block: clamp(4.5rem, 8vw, 7.5rem);
+}
+
+/* Landing */
+.landing-header {
+  height: 5rem;
+}
+
+.desktop-nav a,
+.nav-login,
+.landing-footer a,
+.mobile-nav-panel > a {
+  font-size: var(--font-body) !important;
+}
+
+.nav-cta {
+  min-height: 2.75rem;
+  font-size: var(--font-secondary) !important;
+}
+
+.hero {
+  min-height: min(900px, 100vh);
+  padding-block: clamp(8rem, 12vw, 10rem) clamp(5rem, 8vw, 7rem);
+}
+
+.hero-grid {
+  grid-template-columns: minmax(0, 0.92fr) minmax(520px, 1.08fr);
+  gap: clamp(2.5rem, 5vw, 5rem);
+}
+
+.hero-copy h1,
+.section-heading h2,
+.feature-copy h2,
+.center-copy h2,
+.final-inner h2 {
+  font-size: var(--font-headline) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.045em !important;
+}
+
+.hero-copy > p,
+.section-heading p,
+.feature-copy > p,
+.center-copy > p,
+.final-inner > p {
+  max-width: 42rem;
+  font-size: var(--font-body) !important;
+}
+
+.hero-trust,
+.eyebrow,
+.section-label,
+.card-eyebrow,
+.learn-label,
+.upgrade-kicker,
+.auth-kicker,
+.question-step {
+  font-size: var(--font-secondary) !important;
+}
+
+.hero-product {
+  width: min(700px, 100%);
+}
+
+.landing :where(.feature-card, .step-card, .testimonial-card, .pricing-card) {
+  padding: var(--card-pad);
+}
+
+.landing :where(.feature-card, .step-card, .testimonial-card, .pricing-card) p {
+  max-width: 42rem;
+}
+
+.faq-item summary {
+  min-height: 3.5rem;
+  font-size: var(--font-body) !important;
+}
+
+/* Shell e páginas internas */
+.app-frame {
+  grid-template-columns: 280px minmax(0, 1fr);
+}
+
+.app-sidebar {
+  width: 280px;
+  padding: 0 1rem 1rem;
+}
+
+.sidebar-brand,
+.app-topbar {
+  height: 4.5rem;
+}
+
+.sidebar-nav {
+  gap: 0.3rem;
+}
+
+.sidebar-nav a {
+  min-height: 3rem;
+  height: auto;
+  padding: 0.65rem 0.75rem;
+  font-size: var(--font-secondary) !important;
+}
+
+.sidebar-nav > small,
+.sidebar-plan > span {
+  font-size: var(--font-caption) !important;
+}
+
+.sidebar-plan,
+.sidebar-streak {
+  padding: 1rem;
+}
+
+.sidebar-plan b,
+.sidebar-streak b,
+.sidebar-user b {
+  font-size: var(--font-secondary) !important;
+}
+
+.sidebar-plan small,
+.sidebar-streak small,
+.sidebar-user small {
+  font-size: var(--font-caption) !important;
+}
+
+.sidebar-user {
+  min-height: 3.25rem;
+}
+
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: var(--font-secondary) !important;
+}
+
+.app-topbar {
+  padding-inline: var(--page-pad);
+}
+
+.app-topbar > div:first-child,
+.sync-chip,
+.xp-chip,
+.streak-chip {
+  font-size: var(--font-secondary) !important;
+}
+
+.sync-chip,
+.xp-chip,
+.streak-chip {
+  height: 2.5rem;
+  padding-inline: 0.75rem;
+}
+
+.topbar-actions .icon-button,
+.topbar-menu {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.app-content {
+  max-width: 1440px;
+  padding: var(--page-pad) var(--page-pad) clamp(3.5rem, 6vw, 5rem);
+}
+
+.standard-page,
+.dashboard-page {
+  display: grid;
+  gap: var(--content-gap);
+}
+
+.page-intro {
+  margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
+.page-intro h1,
+.dashboard-welcome h1 {
+  font-size: var(--font-section) !important;
+}
+
+.panel-card,
+.metric-card,
+.recent-card,
+.level-row,
+.review-row,
+.notebook-card {
+  border-radius: 0.875rem;
+}
+
+.metric-card,
+.recent-card,
+.level-row,
+.review-row,
+.notebook-card,
+.today-card,
+.review-card,
+.consistency-card,
+.level-card,
+.profile-summary,
+.profile-form,
+.current-plan,
+.upgrade-card,
+.admin-settings {
+  padding: var(--card-pad);
+}
+
+.metrics-grid,
+.dashboard-grid,
+.recent-grid,
+.notebook-grid,
+.profile-grid,
+.subscription-grid,
+.admin-metrics,
+.settings-grid {
+  gap: var(--content-gap);
+}
+
+.notebook-tabs {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.notebook-tabs button {
+  min-height: 2.75rem;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.admin-tabs {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.admin-tabs button {
+  min-height: 2.75rem;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.demo-notice,
+.billing-demo-note,
+.admin-demo {
+  width: auto;
+  max-width: 100%;
+  flex-wrap: wrap;
+  white-space: normal;
+}
+
+.demo-notice,
+.billing-demo-note,
+.admin-demo,
+.profile-level,
+.status-button,
+.difficulty,
+.concept-label {
+  min-height: 2rem;
+  align-items: center;
+  padding: 0.4rem 0.65rem;
+  font-size: var(--font-secondary) !important;
+}
+
+.form-grid label > span,
+.auth-form-wrap label > span {
+  font-size: var(--font-secondary) !important;
+}
+
+.form-grid input,
+.form-grid select,
+.profile-form textarea,
+.input-shell {
+  min-height: var(--control-height);
+  font-size: var(--font-body) !important;
+}
+
+.profile-actions,
+.danger-zone {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+/* Acesso e onboarding */
+.auth-form-wrap {
+  width: min(460px, 100%);
+}
+
+.auth-form-panel {
+  padding: clamp(1.5rem, 5vw, 4rem);
+}
+
+.auth-brand-panel {
+  padding: clamp(2rem, 5vw, 4.5rem);
+}
+
+.auth-brand-panel h1,
+.auth-form-wrap h2,
+.onboarding-card h1 {
+  font-size: var(--font-section) !important;
+}
+
+.auth-brand-panel p,
+.auth-form-wrap > p,
+.auth-brand-panel li,
+.auth-switch,
+.auth-disclaimer,
+.onboarding-card > p,
+.option-grid b {
+  font-size: var(--font-body) !important;
+}
+
+.input-shell {
+  height: var(--control-height);
+  padding-inline: 0.875rem;
+}
+
+.onboarding-card {
+  width: min(720px, calc(100% - 2rem));
+}
+
+.option-grid {
+  gap: 0.875rem;
+}
+
+.option-grid button {
+  min-height: 5.25rem;
+  padding: 1rem;
+}
+
+/* Treino, editor e terminal */
+.training-page {
+  margin: calc(-1 * var(--page-pad));
+}
+
+.training-header {
+  min-height: 5rem;
+  height: auto;
+  padding: 0.75rem var(--page-pad);
+}
+
+.back-link,
+.training-header b,
+.training-progress > span,
+.training-stagebar b,
+.training-stagebar small {
+  font-size: var(--font-secondary) !important;
+}
+
+.training-header small,
+.exercise-counter > span {
+  font-size: var(--font-caption) !important;
+}
+
+.training-stagebar {
+  min-height: 4.5rem;
+  height: auto;
+}
+
+.training-stagebar button {
+  width: auto;
+  min-width: 10.5rem;
+  padding: 0.65rem 1rem;
+}
+
+.training-stagebar button > span,
+.exercise-counter button {
+  width: 2rem;
+  height: 2rem;
+  font-size: var(--font-secondary) !important;
+}
+
+.stage-detail-stage {
+  min-height: calc(100dvh - 13.25rem);
+  padding: clamp(2rem, 4vw, 3.5rem) var(--page-pad) 4.5rem;
+}
+
+.stage-detail-heading {
+  max-width: 820px;
+}
+
+.stage-detail-heading h1 {
+  font-size: var(--font-headline) !important;
+}
+
+.stage-detail-heading > p,
+.stage-card p,
+.stage-rule-list,
+.stage-detail-aside > p,
+.solution-locked p {
+  font-size: var(--font-body) !important;
+}
+
+.stage-kicker,
+.stage-card-label,
+.stage-status,
+.correction-steps > div > span,
+.stage-aside-metrics small {
+  font-size: var(--font-caption) !important;
+}
+
+.stage-card h2,
+.stage-detail-aside h3 {
+  font-size: var(--font-card) !important;
+}
+
+.stage-card,
+.stage-detail-aside {
+  padding: var(--card-pad);
+}
+
+.stage-card-pair,
+.stage-detail-grid,
+.stage-detail-main {
+  gap: var(--content-gap);
+}
+
+.stage-criteria-list b,
+.stage-criteria-list small,
+.stage-card small,
+.stage-code-preview > div > small,
+.reference-solution > div > small,
+.stage-aside-metrics b {
+  font-size: var(--font-secondary) !important;
+}
+
+.stage-code-preview pre,
+.reference-solution pre {
+  font-size: var(--font-code) !important;
+  line-height: 1.7 !important;
+}
+
+.stage-detail-aside .button {
+  min-height: var(--control-height);
+  font-size: var(--font-body) !important;
+}
+
+.section-kicker,
+.unlock-state,
+.integration-pending,
+.language-progress-row > span,
+.language-requirements > div:first-child,
+.language-requirements li > span,
+.recommendation-banner > span,
+.skill-last-practice,
+.reward-level-card > span:last-child,
+.xp-ledger-list > div > span {
+  font-size: var(--font-secondary) !important;
+}
+
+.language-card h2,
+.recommendation-banner h2,
+.skill-card h2,
+.reward-level-card h2 {
+  font-size: var(--font-card) !important;
+}
+
+.language-card,
+.syntax-comparison,
+.recommendation-banner,
+.skill-card,
+.reward-level-card,
+.xp-ledger {
+  padding: var(--card-pad);
+}
+
+.language-actions .button,
+.reward-item h4,
+.xp-ledger-list b,
+.xp-ledger-list small,
+.xp-ledger-list code {
+  font-size: var(--font-secondary) !important;
+}
+
+.syntax-grid pre {
+  font-size: var(--font-code) !important;
+}
+
+.workspace-shell {
+  height: calc(100dvh - 13.25rem);
+  min-height: 620px;
+  grid-template-columns: minmax(270px, 0.75fr) minmax(500px, 1.5fr) minmax(
+      290px,
+      0.82fr
+    );
+}
+
+.exercise-counter {
+  min-height: 4.25rem;
+  padding-inline: 1.25rem;
+}
+
+.exercise-scroll {
+  padding: clamp(1.25rem, 2vw, 2rem);
+}
+
+.exercise-scroll > h1 {
+  font-size: var(--font-card) !important;
+  margin-block: 1.25rem 0.75rem;
+}
+
+.exercise-objective,
+.task-box ol,
+.revealed-hints p,
+.explanation-box p {
+  font-size: var(--font-body) !important;
+}
+
+.task-box,
+.example-box,
+.revealed-hints > div,
+.explanation-box {
+  padding: 1rem;
+}
+
+.task-box b,
+.hint-heading b,
+.hint-button,
+.solution-link,
+.example-box code {
+  font-size: var(--font-secondary) !important;
+}
+
+.hint-button {
+  min-height: 3rem;
+  padding: 0.7rem 0.875rem;
+}
+
+.hint-button span,
+.revealed-hints span,
+.example-box > span,
+.exercise-foot {
+  font-size: var(--font-caption) !important;
+}
+
+.exercise-foot {
+  min-height: 3.25rem;
+  padding-inline: 1.25rem;
+}
+
+.code-panel {
+  grid-template-rows: 3.5rem 4.25rem minmax(250px, 1fr) minmax(170px, 0.5fr);
+}
+
+.code-panel.has-runtime-input {
+  grid-template-rows: 3.5rem 4.25rem 4.25rem minmax(220px, 1fr) minmax(
+      170px,
+      0.5fr
+    );
+}
+
+.editor-toolbar {
+  padding-inline: 0.875rem;
+}
+
+.editor-toolbar span,
+.editor-toolbar button {
+  font-size: var(--font-secondary) !important;
+}
+
+.editor-toolbar button {
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding-inline: 0.65rem;
+}
+
+.editor-font-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding-right: 0.5rem;
+  border-right: 1px solid #2a2e38;
+}
+
+.editor-font-controls span {
+  min-width: 2.75rem;
+  justify-content: center;
+  color: #aeb5c2;
+}
+
+.editor-font-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.runtime-input-row {
+  padding: 0.55rem 0.875rem;
+}
+
+.runtime-input-row b,
+.runtime-input-row small,
+.runtime-input-row input {
+  font-size: var(--font-secondary) !important;
+}
+
+.runtime-input-row input {
+  min-height: 2.75rem;
+}
+
+.console-panel {
+  min-height: 170px;
+  grid-template-rows: 3rem 1fr;
+}
+
+.console-tabs button,
+.console-tabs small,
+.console-empty b,
+.console-empty p,
+.running-state,
+.execution-error b,
+.execution-error p,
+.execution-error small,
+.console-lines code,
+.console-lines p,
+.run-result > small,
+.feedback-summary b,
+.feedback-summary p,
+.test-result-list,
+.friendly-error {
+  font-size: var(--font-console) !important;
+  line-height: 1.6 !important;
+}
+
+.console-output {
+  padding: 1rem 1.125rem;
+}
+
+.editor-actions {
+  gap: 1rem;
+  padding: 0.65rem 0.875rem;
+}
+
+.editor-actions > span {
+  font-size: var(--font-secondary) !important;
+}
+
+.editor-actions .button {
+  min-height: 3rem;
+  font-size: var(--font-body) !important;
+}
+
+/* Tutor */
+.tutor-panel {
+  grid-template-rows: 4.25rem minmax(0, 1fr) auto;
+}
+
+.tutor-header {
+  padding-inline: 1rem;
+}
+
+.tutor-header b,
+.tutor-header small,
+.tutor-message p,
+.tutor-message small,
+.tutor-quick-actions button,
+.request-solution,
+.tutor-question input,
+.attempt-history summary,
+.attempt-history article b,
+.attempt-history article small,
+.attempt-history > p {
+  font-size: var(--font-secondary) !important;
+  line-height: 1.55 !important;
+}
+
+.tutor-conversation {
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.tutor-message p {
+  padding: 0.875rem 1rem;
+}
+
+.tutor-controls {
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.tutor-quick-actions {
+  gap: 0.5rem;
+}
+
+.tutor-quick-actions button,
+.request-solution {
+  min-height: 3rem;
+  padding: 0.7rem 0.75rem;
+}
+
+.tutor-question {
+  height: 3rem;
+  padding-left: 0.875rem;
+}
+
+.tutor-question button {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+/* Estados e conteúdo legal */
+.route-state p,
+.legal-page article p,
+.legal-updated,
+.legal-page > header > a {
+  font-size: var(--font-body) !important;
+}
+
+.legal-page > article {
+  max-width: 800px;
+}
+
+/* Programação diária e acesso aos treinos */
+.daily-program-section {
+  margin-block: var(--section-gap);
+}
+
+.daily-rotation-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--violet-bright);
+  font-size: var(--font-secondary) !important;
+}
+
+.daily-rotation-label svg {
+  width: 1.25rem;
+}
+
+.daily-program-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  margin-top: 1rem;
+}
+
+.daily-workout-card {
+  min-height: 7.25rem;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.125rem;
+  border: 1px solid var(--border);
+  border-radius: 0.875rem;
+  color: var(--text);
+  background: var(--surface);
+}
+
+.daily-workout-card.current {
+  border-color: rgba(70, 211, 154, 0.55);
+  background: linear-gradient(135deg, var(--violet-soft), var(--surface));
+  box-shadow: 0 0 0 1px rgba(70, 211, 154, 0.12);
+}
+
+.daily-workout-card.current:hover {
+  transform: translateY(-2px);
+  border-color: var(--violet);
+}
+
+.daily-workout-card.available {
+  border-color: rgba(70, 211, 154, 0.2);
+}
+
+.daily-workout-card.available:hover {
+  transform: translateY(-2px);
+  border-color: rgba(70, 211, 154, 0.55);
+}
+
+.daily-workout-card.available small {
+  color: var(--green);
+}
+
+.daily-workout-card.locked {
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface) 72%, var(--bg));
+}
+
+.daily-workout-number {
+  width: 3.25rem;
+  height: 3.25rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.75rem;
+  color: var(--violet-bright);
+  background: var(--violet-soft);
+  font: 700 var(--font-card) var(--font-mono) !important;
+}
+
+.daily-workout-card > div {
+  min-width: 0;
+}
+
+.daily-workout-card small {
+  color: var(--muted);
+  font-size: var(--font-caption) !important;
+  font-weight: 800;
+}
+
+.daily-workout-card.current small {
+  color: var(--green);
+}
+
+.daily-workout-card h4 {
+  margin: 0.25rem 0;
+  font-size: var(--font-card) !important;
+}
+
+.daily-workout-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--font-secondary) !important;
+}
+
+.daily-workout-card > svg {
+  width: 1.5rem;
+  color: var(--muted);
+}
+
+.workout-access-state {
+  min-height: calc(100vh - 9rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--page-pad);
+  text-align: center;
+}
+
+.workout-access-state > span {
+  width: 5rem;
+  height: 5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 1.25rem;
+  color: var(--orange);
+  background: rgba(255, 173, 91, 0.1);
+}
+
+.workout-access-state > span svg {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.workout-access-state > small {
+  margin-top: 1.25rem;
+  color: var(--violet-bright);
+  font-size: var(--font-secondary) !important;
+  font-weight: 800;
+}
+
+.workout-access-state h1 {
+  max-width: 720px;
+  font-size: var(--font-section) !important;
+}
+
+.workout-access-state p {
+  max-width: 680px;
+  font-size: var(--font-body) !important;
+}
+
+.workout-access-state > div,
+.admin-preview-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-preview-banner {
+  min-height: 3.5rem;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  color: var(--orange);
+  border-bottom: 1px solid rgba(255, 173, 91, 0.2);
+  background: rgba(255, 173, 91, 0.08);
+  font-size: var(--font-secondary);
+}
+
+.admin-preview-banner svg {
+  width: 1.25rem;
+}
+
+.admin-preview-banner a {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.admin-workout-control {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.75fr) auto;
+  align-items: end;
+  gap: var(--grid-gap);
+  margin-bottom: var(--section-gap);
+  padding: var(--card-pad);
+}
+
+.admin-workout-control > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.admin-workout-control > div > span {
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 0.75rem;
+  color: var(--violet-bright);
+  background: var(--violet-soft);
+}
+
+.admin-workout-control h2 {
+  margin: 0.2rem 0 0.4rem;
+  font-size: var(--font-card) !important;
+}
+
+.admin-workout-control p {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--font-secondary) !important;
+}
+
+.admin-workout-control small {
+  color: var(--muted);
+  font-size: var(--font-caption) !important;
+  font-weight: 800;
+}
+
+.admin-workout-control label > span {
+  color: var(--muted);
+  font-size: var(--font-secondary) !important;
+  font-weight: 800;
+}
+
+.admin-workout-control label {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.admin-workout-control select {
+  width: 100%;
+  min-height: 3rem;
+}
+
+.admin-workout-control > button {
+  min-height: 3rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 1360px) {
+  .app-frame {
+    grid-template-columns: 1fr;
+  }
+
+  .app-main {
+    grid-column: 1;
+  }
+
+  .app-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: var(--shadow);
+  }
+
+  .app-sidebar.sidebar-open {
+    transform: translateX(0);
+  }
+
+  .mobile-close,
+  .topbar-menu {
+    display: grid;
+  }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    z-index: 29;
+    inset: 0;
+    border: 0;
+    background: rgba(2, 3, 6, 0.62);
+    backdrop-filter: blur(3px);
+  }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(460px, 1fr);
+  }
+}
+
+@media (max-width: 1100px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy {
+    max-width: 760px;
+  }
+
+  .hero-product {
+    justify-self: center;
+  }
+
+  .training-page {
+    margin: calc(-1 * var(--page-pad));
+  }
+
+  .workspace-shell {
+    height: auto;
+    min-height: calc(100vh - 12rem);
+    display: block;
+    padding-top: 3.5rem;
+    position: relative;
+  }
+
+  .mobile-workspace-tabs {
+    height: 3.5rem;
+    position: absolute;
+    inset: 0 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.375rem;
+    padding: 0.375rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-soft);
+  }
+
+  .mobile-workspace-tabs button {
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 0;
+    border-radius: 0.5rem;
+    color: var(--muted);
+    background: transparent;
+    font-size: var(--font-secondary) !important;
+  }
+
+  .mobile-workspace-tabs button.active {
+    color: var(--text);
+    background: var(--surface-raised);
+  }
+
+  .exercise-panel,
+  .code-panel,
+  .tutor-panel {
+    display: none;
+  }
+
+  .exercise-panel.mobile-active,
+  .code-panel.mobile-active,
+  .tutor-panel.mobile-active {
+    min-height: calc(100vh - 15.5rem);
+    display: grid;
+    border-inline: 0;
+  }
+
+  .code-panel.mobile-active,
+  .tutor-panel.mobile-active {
+    height: calc(100dvh - 15.5rem);
+    min-height: 620px;
+  }
+
+  .tutor-panel.mobile-active {
+    grid-template-rows: 4.25rem minmax(320px, 1fr) auto;
+  }
+
+  .admin-workout-control {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .admin-workout-control > div {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --font-secondary: 1rem;
+    --font-body: clamp(1rem, 4.2vw, 1.125rem);
+    --font-card: clamp(1.25rem, 5.2vw, 1.5rem);
+    --font-section: clamp(1.75rem, 7vw, 2.25rem);
+    --font-headline: clamp(2rem, 9vw, 2.5rem);
+    --font-console: 0.9375rem;
+    --page-pad: clamp(0.875rem, 4vw, 1.25rem);
+    --card-pad: clamp(1rem, 4vw, 1.25rem);
+  }
+
+  .container {
+    width: min(100% - 1.75rem, 1320px);
+  }
+
+  .section {
+    padding-block: clamp(3.5rem, 14vw, 5rem);
+  }
+
+  .landing-header {
+    height: 4.5rem;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-block: 7rem 4rem;
+  }
+
+  .hero-copy h1,
+  .section-heading h2,
+  .feature-copy h2,
+  .center-copy h2,
+  .final-inner h2 {
+    font-size: var(--font-headline) !important;
+  }
+
+  .hero-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+  }
+
+  .hero-trust {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+    font-size: var(--font-body) !important;
+  }
+
+  .app-content {
+    padding: var(--page-pad) var(--page-pad) 3.5rem;
+  }
+
+  .app-topbar {
+    min-height: 4.25rem;
+    padding-inline: var(--page-pad);
+  }
+
+  .app-topbar > div:first-child {
+    min-width: 0;
+  }
+
+  .app-topbar > div:first-child b {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .topbar-actions {
+    flex: 0 0 auto;
+    gap: 0.35rem !important;
+  }
+
+  .sync-chip {
+    width: 2.75rem;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .sync-chip .sync-label {
+    display: none;
+  }
+
+  .streak-chip {
+    display: none;
+  }
+
+  .metrics-grid,
+  .admin-metrics,
+  .notebook-grid,
+  .option-grid,
+  .form-grid,
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-welcome,
+  .onboarding-banner,
+  .page-intro,
+  .danger-zone {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .training-header {
+    min-height: 4.5rem;
+  }
+
+  .training-stagebar {
+    min-height: 4.25rem;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-inline: 0.5rem;
+  }
+
+  .training-stagebar button {
+    min-width: 11rem;
+  }
+
+  .training-stagebar button b,
+  .training-stagebar button small {
+    white-space: nowrap;
+  }
+
+  .exercise-panel.mobile-active,
+  .code-panel.mobile-active,
+  .tutor-panel.mobile-active {
+    min-height: calc(100vh - 14.75rem);
+  }
+
+  .code-panel.mobile-active,
+  .tutor-panel.mobile-active {
+    height: auto;
+    min-height: 660px;
+  }
+
+  .exercise-counter {
+    overflow-x: auto;
+    gap: 0.75rem;
+  }
+
+  .exercise-counter > span {
+    display: none;
+  }
+
+  .exercise-counter > div {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .exercise-counter button {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .editor-toolbar {
+    overflow-x: auto;
+  }
+
+  .editor-toolbar > div {
+    flex: 0 0 auto;
+  }
+
+  .editor-toolbar .language-dot {
+    display: none;
+  }
+
+  .editor-toolbar button {
+    min-width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .runtime-input-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .runtime-input-row small {
+    display: block;
+    white-space: normal;
+  }
+
+  .code-panel.has-runtime-input {
+    grid-template-rows: 3.5rem auto auto minmax(300px, 1fr) minmax(
+        200px,
+        0.55fr
+      );
+  }
+
+  .editor-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .editor-actions > span {
+    display: block;
+  }
+
+  .editor-actions > div,
+  .editor-actions .button {
+    width: 100%;
+  }
+
+  .editor-actions .button {
+    flex: 1;
+  }
+
+  .tutor-quick-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .tutor-quick-actions button,
+  .request-solution,
+  .tutor-question {
+    min-height: 3.25rem;
+  }
+
+  .auth-form-panel {
+    padding: 2rem var(--page-pad);
+  }
+
+  .onboarding-card {
+    width: calc(100% - 1.75rem);
+    padding-block: 2.5rem;
+  }
+
+  .legal-page {
+    padding-inline: var(--page-pad);
+  }
+
+  .daily-program-grid,
+  .admin-workout-control {
+    grid-template-columns: 1fr;
+  }
+
+  .daily-workout-card {
+    min-height: 6.5rem;
+    padding: 1rem;
+  }
+
+  .workout-access-state > div,
+  .admin-preview-banner {
+    flex-direction: column;
+  }
+
+  .workout-access-state .button,
+  .admin-workout-control > button {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1600px) {
+  .app-content {
+    max-width: 1500px;
+  }
+
+  .workspace-shell {
+    grid-template-columns: minmax(320px, 0.78fr) minmax(620px, 1.55fr) minmax(
+        340px,
+        0.84fr
+      );
+  }
+}
+
+/* Workspace compacto: editor, console/testes e Tutor cabem no painel visível. */
+@media (min-width: 1101px) {
+  .workspace-shell {
+    height: calc(100dvh - 13.25rem);
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .code-panel {
+    display: flex;
+  }
+}
+
+.code-panel {
+  min-height: 0;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.code-panel.editor-expanded {
+  display: flex !important;
+}
+
+.code-panel > .editor-toolbar,
+.code-panel > .editor-actions,
+.code-panel > .code-version-tools,
+.code-panel > .typing-analysis-notice,
+.code-panel > .runtime-input-row,
+.code-panel > .exercise-feedback {
+  flex: 0 0 auto;
+}
+
+.code-panel > .monaco-wrap {
+  min-height: 9.5rem;
+  flex: 1 1 auto;
+}
+
+.code-panel > .console-panel {
+  min-height: 9.5rem;
+  flex: 0 0 clamp(9.5rem, 27%, 11.5rem);
+}
+
+.code-panel .code-version-tools {
+  min-height: 2.25rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.tutor-panel {
+  min-height: 0;
+  overflow: hidden;
+  grid-template-rows: 4.25rem minmax(0, 1fr) clamp(12.5rem, 38%, 18rem);
+}
+
+.tutor-conversation {
+  min-height: 0;
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  contain: layout paint;
+}
+
+.tutor-conversation:focus-visible {
+  outline: 2px solid var(--violet-bright);
+  outline-offset: -2px;
+}
+
+.tutor-message > div {
+  min-width: 0;
+  max-width: calc(100% - 2rem);
+}
+
+.tutor-message p {
+  overflow-wrap: anywhere;
+}
+
+.tutor-controls {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+/* A lista de práticas mostra mais opções sem alongar desnecessariamente a página. */
+.practice-page {
+  gap: 1rem;
+}
+
+.practice-page .practice-filters {
+  padding: 1rem;
+}
+
+.practice-page .practice-results {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr));
+  gap: 0.75rem;
+}
+
+.practice-page .practice-exercise-card {
+  gap: 0.875rem;
+  padding: 1rem;
+}
+
+.practice-page .practice-exercise-card p {
+  line-height: 1.45;
+}
+
+@media (max-width: 1100px) {
+  .workspace-shell {
+    height: calc(100dvh - 13.25rem);
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .exercise-panel.mobile-active,
+  .code-panel.mobile-active,
+  .tutor-panel.mobile-active {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .code-panel.mobile-active {
+    display: flex;
+  }
+
+  .tutor-panel.mobile-active {
+    display: grid;
+    grid-template-rows: 4.25rem minmax(0, 1fr) clamp(12rem, 43%, 15rem);
+  }
+
+  .code-panel .code-version-tools > button span {
+    display: none;
+  }
+
+  .tutor-quick-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .workspace-shell {
+    height: calc(100dvh - 13.25rem);
+    min-height: 0;
+  }
+
+  .exercise-panel.mobile-active,
+  .code-panel.mobile-active,
+  .tutor-panel.mobile-active {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .code-panel > .editor-actions {
+    align-items: center;
+    flex-direction: row;
+    padding-block: 0.5rem;
+  }
+
+  .code-panel > .editor-actions > span {
+    display: none;
+  }
+
+  .code-panel > .editor-actions > div {
+    width: 100%;
+  }
+
+  .code-panel > .monaco-wrap {
+    min-height: 7rem;
+  }
+
+  .code-panel > .console-panel {
+    min-height: 8.5rem;
+    flex-basis: clamp(8.5rem, 29%, 10rem);
+  }
+
+  .tutor-panel.mobile-active {
+    grid-template-rows: 4.25rem minmax(0, 1fr) minmax(11.75rem, 43%);
+  }
+
+  .tutor-controls {
+    padding: 0.75rem;
+  }
+
+  .tutor-quick-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .tutor-quick-actions button,
+  .request-solution,
+  .tutor-question {
+    min-height: 2.75rem;
+  }
+}
