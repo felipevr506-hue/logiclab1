@@ -8,7 +8,7 @@ Netlify, em vez de enviar apenas a pasta `public`.
 ## Configuração do projeto
 
 - Base directory: raiz do repositório (onde está `package.json`).
-- Build command: `npm run db:generate && npm run build`.
+- Build command: `npm run build` (gera o cliente Prisma antes do Next.js).
 - Publish directory: `.next`.
 
 ## Variáveis no painel da Netlify
