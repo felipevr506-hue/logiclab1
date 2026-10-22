@@ -28,6 +28,7 @@ test("guest can enter without a database and cannot access private accounts", as
   expect((await page.request.get("/api/progress?account=guest@logiclab.invalid")).status()).toBe(403);
   await page.goto("/admin");
   await expect(page).toHaveURL(/\/dashboard$/);
+  await expect(page.getByRole("heading", { name: "Olá, Convidado." })).toBeVisible();
   const openMenu = page.getByRole("button", { name: "Abrir menu" });
   if (await openMenu.isVisible()) await openMenu.click();
   await page.getByRole("button", { name: "Sair da conta" }).click();
