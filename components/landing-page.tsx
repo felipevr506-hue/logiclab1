@@ -50,7 +50,7 @@ const faqs = [
 
 function StartLink({ continueHref }: { continueHref: string | null }) {
   return (
-    <Link className={styles.primary} href={continueHref ?? "/cadastro"}>
+    <Link className={styles.primary} href={continueHref ?? "/entrar"}>
       {continueHref ? "Continuar aprendendo" : "Começar grátis"}
       <ArrowRight size={18} aria-hidden="true" />
     </Link>

@@ -226,6 +226,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           type="button"
           className="sidebar-logout"
           onClick={async () => {
+            if (state.user.accountId?.startsWith("guest:")) {
+              endSession();
+              window.location.assign("/sair-convidado");
+              return;
+            }
             const response = await fetch("/api/auth/logout", {
               method: "POST",
               headers: { "x-logiclab-request": "same-origin" },

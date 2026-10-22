@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { GUEST_COOKIE, guestAccount } from "@/services/auth/guest";
 import {
   getDevelopmentPrincipal,
   getRequestSession,
@@ -8,6 +9,12 @@ import {
 export const runtime = "nodejs";
 
 export async function GET(request: NextRequest) {
+  const guest = guestAccount(request.cookies.get(GUEST_COOKIE)?.value);
+  if (guest)
+    return NextResponse.json(
+      { account: guest, demo: true },
+      { headers: { "Cache-Control": "no-store" } },
+    );
   const authenticated = await getRequestSession(request, {
     allowUnverified: true,
   });

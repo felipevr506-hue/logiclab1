@@ -1,5 +1,11 @@
 # Publicar o LogicLab na Netlify
 
+A entrada em `/entrar` oferece o modo convidado, sem banco, e-mail ou senha.
+Nesse modo, rascunhos e preferências ficam somente no navegador; o convidado
+não recebe acesso administrativo nem pode ler ou gravar dados de contas.
+As variáveis de banco e e-mail abaixo são necessárias para os recursos de
+contas reais, não para entrar como convidado.
+
 O arquivo `netlify.toml` define Node.js 22, gera o cliente Prisma e compila o
 Next.js. A Netlify detecta o framework e instala automaticamente seu adaptador.
 Este aplicativo usa rotas de servidor; publique pelo repositório conectado à

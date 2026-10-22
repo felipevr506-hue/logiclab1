@@ -1,9 +1,14 @@
-import { AuthScreen } from "@/components/auth-screen";
-export default async function LoginPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ next?: string }>;
-}) {
-  const { next } = await searchParams;
-  return <AuthScreen mode="login" nextPath={next} />;
+export default function LoginPage() {
+  return (
+    <main className="route-state">
+      <h1>Bem-vindo ao LogicLab</h1>
+      <p>Entre como convidado, sem cadastro e sem senha.</p>
+      <form action="/convidado" method="post">
+        <button className="button button-primary" type="submit">
+          Entrar como convidado
+        </button>
+      </form>
+      <p>Seu progresso fica salvo apenas neste navegador.</p>
+    </main>
+  );
 }

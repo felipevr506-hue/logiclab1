@@ -291,6 +291,14 @@ function AccountStateProvider({
           // Corrupt or unavailable local storage cannot restore a different owner.
         }
         localState = applyOfficialProgress(localState, null);
+        if (account.guest) {
+          if (!cancelled) {
+            remoteReady.current = true;
+            setSyncIndicator({ status: "local", message: "Convidado — salvo neste navegador" });
+            setState(localState);
+          }
+          return;
+        }
         try {
           const remote = await loadRemoteProgress(account.email, account.id);
           if (cancelled) return;
@@ -354,6 +362,7 @@ function AccountStateProvider({
   useEffect(() => {
     if (
       !account ||
+      account.guest ||
       !ownsProgress(state, account) ||
       !state.hydrated ||
       !remoteReady.current

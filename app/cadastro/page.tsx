@@ -1,2 +1,5 @@
-import { AuthScreen } from "@/components/auth-screen";
-export default function SignupPage() { return <AuthScreen mode="signup" />; }
+import { redirect } from "next/navigation";
+
+export default function SignupPage() {
+  redirect("/entrar");
+}

@@ -3,6 +3,7 @@ import type { AppState } from "./types";
 export const AUTH_CHANGE_KEY = "logiclab-auth-change";
 
 export type SessionAccount = {
+  guest?: boolean;
   demo?: boolean;
   id: string;
   name: string;
