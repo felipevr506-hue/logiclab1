@@ -248,9 +248,9 @@ export async function createSession(accountId: string, userAgent: string) {
 }
 
 export async function getSession(token: string | undefined) {
+  if (!token) return null;
   const persistent = persistentAuth();
   if (persistent) return persistent.getSession(token);
-  if (!token) return null;
   const database = await readDatabase();
   const session = database.sessions.find(
     (candidate) => candidate.tokenHash === hashToken(token),

@@ -18,3 +18,25 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Verify public pages without a database
+        shell: bash
+        run: |
+          npm start > "$RUNNER_TEMP/logiclab-server.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" || true' EXIT
+          ready=false
+          for attempt in {1..30}; do
+            status=$(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/ || true)
+            if [ "$status" = "200" ]; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+          if [ "$ready" != "true" ]; then
+            cat "$RUNNER_TEMP/logiclab-server.log"
+            exit 1
+          fi
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/entrar)" = "200"
+          test "$(curl -s -D "$RUNNER_TEMP/dashboard-headers" -o /dev/null -w '%{http_code}' http://localhost:3000/dashboard)" = "307"
+          grep -qi '^location: /entrar' "$RUNNER_TEMP/dashboard-headers"
